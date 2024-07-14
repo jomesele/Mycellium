@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+{% load static %}
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Basic QR-code reader example - Version 1.1.0 based on webcamjs</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<link rel="stylesheet" href="{% static 'ss/reset.css' %}" />
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/webcam.min.js' %}"></script>
+
+	<script type="text/javascript" src="{% static 'js/qr/grid.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/version.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/detector.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/formatinf.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/errorlevel.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/bitmat.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/datablock.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/bmparser.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/datamask.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/rsdecoder.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/gf256poly.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/gf256.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/decoder.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/qrcode.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/findpat.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/alignpat.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/qr/databr.js' %}"></script>
+
+	<script src="{% static 'js/effects.js' %}"></script>
+</head>
+<body>
+
+<div class="pageWrapper">
+
+	<div class="boxWrapper">
+		<div id="example" style="width:320px; height:240px;"></div>
+	</div>
+
+	<div class="button">
+		<a id="button">Scan QR code</a>
+	</div>
+
+	<div class="boxWrapper auto">
+		<div id="hiddenImg"></div>
+		<div id="qrContent"><p>Result will be here.</p></div>
+	</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+
+{% if user.type == 'STORE' %} 
+    <h2>{{user.name}}</h2>
+{% else %}
+    <h2>Alseram</h2>
+{% endif %}
+
+<div class="center">
+	{% csrf_token %}
+		<img src="{{ user.storeQrImg.url }}" href="{% url 'download_img' %}" alt="img">
+	<hr>
+	<a class="text-center">{{ user.phone | title }}</a>
+	<hr>
+	<h4>You Can Share Your QR code By Downloading</h4>
+	<hr>
+	<div>
+		<a class="btn btn-primary cta" href="{% url 'download_img' %}">Download</a>
+	</div>
+</div>
+
+{% endblock content %}

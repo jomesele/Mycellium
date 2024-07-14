@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+	<h2>My Todo List</h2>
+	{% if purchases %}
+	<ul class="purchases">
+		{% for purchase in purchases %}
+			<li><a href="{% url '' purchase.id %}" class="{% if purchase.completed%}completed{%endif%}">{{ purchase.title }}</a> 
+				 <div  class="purchase-controls">
+				 	<a href="{%url 'purchase-delete' purchase.id %}"><i class="bi bi-trash"></i> </a>
+					<a href="{%url 'purchase-update' purchase.id %}"><i class="bi bi-pencil-square"></i></a>
+		         </div>
+		    </li>
+		{% endfor %}
+	{% else %}
+		<p>🎉 Yay, you have no pending purchases! <a href="{%url 'purchase-create'%}">Create purchase</a></p>
+	{% endif %}
+	</ul>
+</div>
+{%endblock content%}

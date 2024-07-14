@@ -1,0 +1,54 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <title>Mycelium</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="container">
+            	<a href="{%url 'home'%}" class="logo">MYCELIUM</a>
+            	<nav class="nav">
+                    <a href="{%url 'home'%}"><i class="bi bi-house-fill"></i> Home</a>
+	            	<a href="{%url 'about-us'%}"><i class="bi bi-house-fill"></i> About Us</a>
+	                {% if request.user.is_authenticated %}
+                        {% if user.type == 'AGENT' %} 
+		                	<a href="{% url 'agent_profile' %}" title="Update my profile">Profile</a>
+                        {% else %}
+                            <a href="{% url 'store_profile' %}" title="Update my profile">Profile</a>
+                        {% endif %}
+	    	            <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a>
+	                {% else %}
+						<a href="{% url 'login_C' %}" class="btn btn-outline">Login</a>
+	            	    <a href="{% url 'register_C' %}" class="btn btn-primary">Join Now</a>
+	                {% endif %}
+	             </nav>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+            	{% if messages %}
+				{% for message in messages %}
+					<div class="alert alert-{{message.tags}}">
+					       {{message}}
+					     </div>
+					   {% endfor %}
+				{% endif %}
+            
+             {%block content %}
+             {%endblock content%}
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container">
+                <a>© Copyright {% now "Y" %} by <h3 href="htt//www.dirDesign.net">Dir_Design</h3></a>
+            </div>
+        </footer>
+    </body>
+
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+{% load static %}
+
+<div class="center" class="card">
+	
+	<img src="{{ img }}">
+
+     <h2 class="text-center">{{ user.username | title }}</h2>
+	<hr>
+		
+	<label for="email">Email Address: {{user.phone}}</label>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block content %}
+
+  <head>
+    <title>Newsletter sign-up form with success message</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script type="text/javascript" src="{% static 'js/script.js' %}" defer></script>
+  </head>
+  <body>
+    <!-- Sign-up form start -->
+    
+      <!-- <img src="{% static 'images/MYc_logo.jpg' %}" alt="" class="feature-image"> -->
+      <section class="signup__container">
+        <picture>
+          <source
+            media="(min-width:700px)"
+            srcset="{% static 'images/illustration-sign-up-desktop.svg' %}"
+            class="desktop__img"
+          />
+          <img
+          src="{% static 'images/illustration-sign-up-mobile.svg' %}"
+          alt=""
+          srcset=""
+          class="mobile__img"
+        />
+        </picture>
+        <form method="dialog">
+          <h1 class="form__header">Stay updated!</h1>
+          <p class="form__paragraph">
+            Join 60,000+ product managers receiving monthly updates on:
+          </p>
+          <ul class="outline">
+            <li class="outline__text">
+              Product discovery and building what matters
+            </li>
+            <li class="outline__text">
+              Measuring to ensure updates are a success
+            </li>
+            <li class="outline__text">And much more!</li>
+          </ul>
+          <div class="label__error__text">
+            <label for="email__address">Email Address</label>
+            <span class="error__state__text"></span>
+          </div>
+            <button class="form__submit" href="{% url 'agent_signup' %}" >Agent</button>
+            <button class="form__submit" href="{% url 'store_signup' %}" >Store</button>
+            <button class="form__submit" href="{% url 'admin_signup' %}" >Admin</button>    
+        </form>
+      </section>
+    <!-- Sign-up form end -->

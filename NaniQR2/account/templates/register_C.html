@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{%load static %}
+
+
+{%block content%}
+	<section class="feature">
+		<div class="feature-content">
+			<h3>Choose How to Register on <h4>MYCELIUM</h4>	</h3>
+				<a class="btn btn-primary cta" href="{% url 'agent_signup' %}">Agent SignUp</a>
+				<a class="btn btn-primary cta" href="{% url 'store_signup' %}">Store signUp</a>
+
+		</div>
+		<img src="{% static 'images/MYc_logo.jpg' %}" alt="" class="feature-image">
+	</section>
+{%endblock content%}
