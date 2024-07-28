@@ -4,6 +4,9 @@ from django.contrib.auth.models import (
 )
 from django.core.validators import RegexValidator
 from .encode import Encoder
+from catagories.models import Product
+import random
+import datetime
 
 class MyUserManager(BaseUserManager):   
     #Agent 
@@ -31,7 +34,14 @@ class MyUserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
-    
+
+def generate_id(year=None, digits=5):
+    if not year:
+        year=datetime.datetime.now().year
+    year = str(year)
+    digits = int(digits)
+    data = str(random.randint(0,999)) + year[-2:]
+    return data.zfill(digits)[-digits:]   
 
 
 class MyUser(AbstractBaseUser):
@@ -52,7 +62,7 @@ class MyUser(AbstractBaseUser):
             ("Furniture", "furniture"), 
         ]
         return CATGS
-
+    product =  models.ManyToManyField(Product, default = 1)
     type = models.CharField(max_length = 8, choices = Types.choices, default = Types.AGENT)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone = models.CharField(validators=[phone_regex], max_length=13, unique=True) # Validators should be a list
@@ -61,8 +71,6 @@ class MyUser(AbstractBaseUser):
     
     address = models.CharField(max_length=100)
     description = models.CharField(max_length=255)
-    storeQrImg = models.ImageField(upload_to='Store_qr')
-    logo = models.ImageField(upload_to='store_logo') 
     
     category1 = models.CharField(max_length = 100, choices = cats(), default = Types.AGENT)    
 
@@ -85,7 +93,7 @@ class MyUser(AbstractBaseUser):
         # The user is identified by their email address
         return self.phone
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):          
         return self.phone
 
     def has_perm(self, perm, obj=None):
@@ -136,7 +144,17 @@ class Agent(MyUser):
         qr_code.save(f"{'media/user_qr/' + data_to_encode + '.png'}", "PNG")    
         self.qrImg = f"{'user_qr/' + data_to_encode + '.png'}"
         self.save()
-      
+    
+    def code(self):
+        data_to_encode = self.phone
+        random.seed(data_to_encode) 
+        code = 'MYC'+str(random.randint(100000, 999999))
+        self.category1 = code
+        self.save()
+
+    def get_code(self):
+        return self.category1
+        
     @property
     def get_photo_url(self):
         if self.qrImg and hasattr(self.qrImg, 'url'):
@@ -158,10 +176,8 @@ class StoreManager(models.Manager):
         user = self.model( 
             phone = phone,
             name = name,
-            category1 = category1,
             address = address,
             description = description,
-            storeQrImg = storeQrImg 
         ) 
         user.set_password(password)
         user.save(using = self._db) 

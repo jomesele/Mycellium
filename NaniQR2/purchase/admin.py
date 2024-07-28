@@ -1,5 +1,15 @@
 from django.contrib import admin
+from .models import Purchase, PurchaseItem
 
-from .models import Purchase
 
-admin.site.register(Purchase)
+class PurchaseItemInline(admin.TabularInline):
+    model = PurchaseItem
+    raw_id_fields = ['product']
+
+@admin.register(Purchase)
+class PurchaseAdmin(admin.ModelAdmin):
+    list_display = ['id', 'Agent_Code', 'message',
+                    'location',
+                    'created']
+    list_filter = ['created']
+    inlines = [PurchaseItemInline]

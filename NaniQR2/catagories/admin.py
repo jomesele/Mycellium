@@ -9,5 +9,4 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     '''product management config'''
-    list_display = ['name', 'category2']
-    list_filter = ['category2']
+    list_display = ['name']

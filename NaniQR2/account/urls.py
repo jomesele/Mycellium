@@ -12,6 +12,7 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     # Create a new urls.py file in the users app
+     path('', views.index, name='home'),
     path('about-as/', views.about_us, name='about-us'),
     path('login_C/', views.Login_C, name='login_C'),
     path('register_C/', views.Register_C, name='register_C'),
@@ -40,7 +41,8 @@ urlpatterns = [
     path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),name='password_reset_confirm'),
     path('password-reset-complete/',PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
     path('download_img', views.download_img, name='download_img'),
-    
+    path('view_conversationS', views.view_conversationS, name='view_conversationS'),
+    path('view_conversationA', views.view_conversationA, name='view_conversationA'),
 ]
 
 

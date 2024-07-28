@@ -10,12 +10,15 @@ from .forms import  AgentSignUpForm, StoreSignUpForm, AdminaSignUpForm, AgentFor
 from pathlib import Path
 from django.http import HttpResponse
 import os
-from django.http import HttpResponse
+from purchase.models import Message
 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+def index(request):
+    return render(request, 'home.html')
 
 def about_us(request):
     return render(request, 'aboutus.html')
@@ -41,6 +44,7 @@ class  AgentSignUpView(FormView):
         user = form.save()
         login(self.request, user)
         Agent.gen(user)
+        Agent.code(user)
         return super(AgentSignUpView, self).form_valid(form)
 
 class  StoreSignUpView(FormView):
@@ -144,4 +148,15 @@ def download_img(request, filename=''):
     response = HttpResponse(path, content_type='image/png')
     response['Content-Disposition'] = "attachment; filename=%s" % filename + '.png'
     return response
-    
+
+@login_required
+def view_conversationS(request):
+    messages = Message.objects.filter(sender=request.user).order_by('timestamp')
+    count = messages.count()
+    return render(request, 'chatS.html', {'messages': messages, 'count': count})
+
+@login_required
+def view_conversationA(request):
+    messages = Message.objects.filter(recipient=request.user).order_by('timestamp')
+    count = messages.count()
+    return render(request, 'chatA.html', {'messages': messages, 'count': count})

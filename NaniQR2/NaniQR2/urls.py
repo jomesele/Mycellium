@@ -20,13 +20,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-
+admin.AdminSite.site_header = 'MYCELIUM'
 urlpatterns = [
-    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('',include('account.urls')),
     path('',include('purchase.urls')),
-    path('',include('bar.urls'))
+    path('',include('bar.urls')),
+    path('',include('cart.urls')),
+    path('',include('catagories.urls'))
     
 ]
 

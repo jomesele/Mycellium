@@ -109,7 +109,7 @@ h4 {
   background-color : var(--color-gray);
 }
 
-.header .container {
+.header.container {
   display: flex;
   align-items: center;
   gap:1rem;
@@ -403,3 +403,26 @@ textarea {
   }
 }
 
+.notification {
+  background-color: #ffbf00;
+  color: white;
+  text-decoration: none;
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.notification:hover {
+  background: red;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+}

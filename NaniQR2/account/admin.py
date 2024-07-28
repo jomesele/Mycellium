@@ -14,7 +14,7 @@ class AgentCreationForm(forms.ModelForm):
 
     class Meta:
         model = Agent
-        fields = ('phone', 'name', 'category1')
+        fields = ('phone', 'name')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -40,7 +40,7 @@ class StoreCreationForm(forms.ModelForm):
 
     class Meta:
         model = Store
-        fields = ('phone', 'name', 'address', 'description', 'category1')
+        fields = ('phone', 'name', 'address', 'description')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -91,18 +91,18 @@ class AgentAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('phone', 'name', 'is_admin', 'category1')
-    list_filter = ('is_admin', 'category1')
+    list_display = ('phone', 'name', 'is_admin')
+    list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('phone', 'password')}),
-        ('Permissions', {'fields': ('is_admin',)}),
+        ('Permissions', {'fields': ('is_admin',)},),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('phone', 'name', 'category1', 'password1', 'password2')}
+            'fields': ('phone', 'name', 'password1', 'password2', 'product')}
         ),
     )
     search_fields = ('phone',)
@@ -117,11 +117,11 @@ class StoreAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('name', 'phone', 'is_admin', 'category1', 'address', 'description')
+    list_display = ('name', 'phone', 'is_admin', 'address', 'description')
     list_display_links = ('name', 'phone')
-    list_filter = ('is_admin', 'category1')
+    list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('name', 'phone', 'category1', 'password')}),
+        (None, {'fields': ('name', 'phone', 'password')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -129,7 +129,7 @@ class StoreAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'phone', 'password1', 'password2', 'category1')}
+            'fields': ('name', 'phone', 'password1', 'password2', 'product')}
         ),
     )
     search_fields = ('name',)

@@ -17,9 +17,18 @@
                     <a href="{%url 'home'%}"><i class="bi bi-house-fill"></i> Home</a>
 	            	<a href="{%url 'about-us'%}"><i class="bi bi-house-fill"></i> About Us</a>
 	                {% if request.user.is_authenticated %}
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
                         {% if user.type == 'AGENT' %} 
+                            <a class="btn btn-primary cta" href="{% url 'view_conversationA' %}">Inbox</a>
 		                	<a href="{% url 'agent_profile' %}" title="Update my profile">Profile</a>
                         {% else %}
+                            <a class="btn btn-primary cta" href="{% url 'view_conversationS' %}">Inbox</a>
                             <a href="{% url 'store_profile' %}" title="Update my profile">Profile</a>
                         {% endif %}
 	    	            <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a>

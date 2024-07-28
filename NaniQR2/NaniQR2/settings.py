@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-@mkz6spx#p2q!@%y^#hz+s1h9@+2y*_9anl)1_&s4x_#-y=^&p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '192.168.200.157', '127.0.0.1', '192.168.251.157', '192.168.25.157']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'purchase',
     'bar',
     'catagories',
+    'cart',
    
 ]
+
+CART_SESSION_ID = 'cart'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +57,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'NaniQR2.urls'
 
 TEMPLATES = [
