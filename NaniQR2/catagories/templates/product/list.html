@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+
+{%block content%}
+	<div class="center">
+	  <div novaldiate class="card">
+	  	{% csrf_token %}
+	    <h1 class="text-center">Your Product in Mycelium</h1>
+        <hr>
+        <h4 class="text-center">Catagory: {{ product.catagory }}</h4>
+		<hr>
+        <h4 class="text-center">Product : {{ product.name }}</h4>
+		<hr>
+		<form action="{% url "cart:cart_add" product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input type="submit" value="ይዘዙ">
+        </form>
+      </div>
+	</div>
+{%endblock content%}
+

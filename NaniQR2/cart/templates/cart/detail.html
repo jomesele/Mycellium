@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="center">
+	{% csrf_token %}
+  <h1>የእርሶ ትዕዛዞች ዝርዝር መረጃ</h1>
+  {% for item in cart %}
+    {% with product=item.product %}
+      <h4 class="text-center">{{ product.name }}</h4>
+      <hr>
+      <form action="{% url "cart:cart_add" product.id %}" method="post">
+        {{ item.update_quantity_form.quantity }}
+        {{ item.update_quantity_form.update }}
+        <input type="submit" value="አስተካክል">
+        {% csrf_token %}
+      </form>
+      <hr>
+      <div>
+        <a href="{% url "cart:cart_remove" product.id %}">ሰርዝ</a>
+      </div>
+      <hr>
+      <div>
+        <a class="text-center">{{ item.price }} ብር</a>
+      </div>
+    {% endwith %}
+  {% endfor %}
+  <p class="text-center">
+    <a href="{% url "shop:product_list" %}" class="btn btn-primary cta">ግብይቶን ይቀጥሉ</a>
+    <a href="{% url "orders:order_create" %}" class="btn btn-primary cta">
+      ትዕዛዞትን ይላኩ
+    </a>
+  </p>
+{% endblock %}
+    
