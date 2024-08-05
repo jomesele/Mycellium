@@ -13,12 +13,14 @@
 	{% csrf_token %}
 	<hr>
 	<hr>
-	<a class="text-center">{{ user.phone | title }}</a>
+	<h4 class="text-center">{{ user.phone | title }}</h4>
+	<hr>
+	<h4 class="text-center">Code: {{ user.category1 }}</h4>
 	<hr>
 	<h4>Ask a Unique Code from the Customer!</h4>
 	<hr>
 	<div>
-		<a class="btn btn-primary cta" href="{% url 'purchase_create' %}">Purchase Create</a>
+		<a class="btn btn-primary cta" href="{% url 'purchase_index' %}">Enter Code</a>
 	</div>
 </div>
 

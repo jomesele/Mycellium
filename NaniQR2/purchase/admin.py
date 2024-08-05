@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Purchase, PurchaseItem
-
+from account.models import Agent
+# Register your models here.
 
 class PurchaseItemInline(admin.TabularInline):
     model = PurchaseItem

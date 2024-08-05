@@ -5,7 +5,7 @@ from .models import Agent, Admina, Store
 class AgentSignUpForm(AgentCreationForm):
     class Meta:
         model = Agent
-        fields = ['phone', 'name', 'product']
+        fields = ['phone', 'name']
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -17,7 +17,7 @@ class AgentSignUpForm(AgentCreationForm):
 class StoreSignUpForm(StoreCreationForm):
     class Meta:
         model = Store
-        fields = ['phone', 'name',  'address', 'description', 'product']
+        fields = ['phone', 'name']
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -29,7 +29,7 @@ class StoreSignUpForm(StoreCreationForm):
 class AdminaSignUpForm(AgentCreationForm):
     class Meta:
         model = Admina
-        fields = ['phone', 'name']
+        fields = ['phone', 'name' ]
     def save(self, commit=True):
         user = super().save(commit=False)
         user.is_admina = True
@@ -45,7 +45,7 @@ class AgentForm(forms.ModelForm):
 class StoreForm(forms.ModelForm):
     class Meta:
         model = Store
-        fields = ['phone', 'name', 'address', 'description'] 
+        fields = ['phone', 'name'] 
 
 class AdminaForm(forms.ModelForm):
     class Meta:

@@ -67,6 +67,7 @@ class MyUser(AbstractBaseUser):
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone = models.CharField(validators=[phone_regex], max_length=13, unique=True) # Validators should be a list
     name = models.CharField(max_length=100)
+    username = models.CharField(max_length=100)
     qrImg = models.ImageField(upload_to='user_qr')
     
     address = models.CharField(max_length=100)
@@ -151,6 +152,7 @@ class Agent(MyUser):
         code = 'MYC'+str(random.randint(100000, 999999))
         self.category1 = code
         self.save()
+        return code
 
     def get_code(self):
         return self.category1
@@ -201,6 +203,18 @@ class Store(MyUser):
         self.storeQrImg = f"{'Store_qr/' + data_to_encode + '.png'}"
         self.save()
 
+    def code(self):
+        data_to_encode = self.phone
+        random.seed(data_to_encode) 
+        code = 'MYC'+str(random.randint(100000, 999999))
+        self.category1 = code
+        self.save()
+        return code
+
+    @property
+    def get_code(self):
+        return self.category1
+
     @property
     def get_ph_url(self):
         if self.storeQrImg and hasattr(self.storeQrImg, 'url'):
@@ -242,3 +256,10 @@ class Admina(MyUser):
         self.type = MyUser.Types.ADMINA
         self.is_admina = True
         return super().save(*args , **kwargs)  
+    
+class AlowedUsers(models.Manager):
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone = models.CharField(validators=[phone_regex], max_length=13, unique=True) # Validators should be a list
+
+    def _str_(self):
+        return self.phone

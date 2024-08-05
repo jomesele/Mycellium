@@ -94,7 +94,7 @@ class AgentAdmin(BaseUserAdmin):
     list_display = ('phone', 'name', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('phone', 'password')}),
+        (None, {'fields': ('phone', 'name', 'username', 'password')}),
         ('Permissions', {'fields': ('is_admin',)},),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -102,7 +102,7 @@ class AgentAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('phone', 'name', 'password1', 'password2', 'product')}
+            'fields': ('phone', 'name', 'username', 'password1', 'password2')}
         ),
     )
     search_fields = ('phone',)
@@ -121,7 +121,7 @@ class StoreAdmin(BaseUserAdmin):
     list_display_links = ('name', 'phone')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('name', 'phone', 'password')}),
+        (None, {'fields': ('phone', 'name', 'username', 'password')}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -129,7 +129,7 @@ class StoreAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('name', 'phone', 'password1', 'password2', 'product')}
+            'fields': ('phone', 'name', 'username' 'password1', 'password2')}
         ),
     )
     search_fields = ('name',)

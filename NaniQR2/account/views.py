@@ -1,22 +1,28 @@
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.views.generic.edit import FormView, CreateView
-from .models import Agent, Admina, Store, MyUser
+from django.views.generic.edit import FormView
+from .models import Agent, Admina, Store
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from .forms import  AgentSignUpForm, StoreSignUpForm, AdminaSignUpForm, AgentForm,  StoreForm,  AdminaForm
 from pathlib import Path
 from django.http import HttpResponse
 import os
 from purchase.models import Message
+import requests
 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+aid = '1289354'
+aph = '8fe823d499fdd19e8600f3670e2d0eb1'
+bt = '7339985071:AAGjTgm1-xzdPzCBtRGo9lKOyY_Sc5j3iR8'
+
+url = f'https://api.telegram.org/bot{bt}/sendMessage'
 def index(request):
     return render(request, 'home.html')
 
@@ -41,10 +47,14 @@ class  AgentSignUpView(FormView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
+        phone = '+251' + form.cleaned_data['phone'][1:11]
+        name = form.cleaned_data['name']
         user = form.save()
         login(self.request, user)
         Agent.gen(user)
-        Agent.code(user)
+        code = Agent.code(user)
+        data = {'chat_id': phone, 'text': 'python msg'}
+        requests.post(url, data).json()
         return super(AgentSignUpView, self).form_valid(form)
 
 class  StoreSignUpView(FormView):
