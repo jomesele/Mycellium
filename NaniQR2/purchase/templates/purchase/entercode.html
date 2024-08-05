@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="center">
+	<form method="post" novalidate class="card">
+    {%csrf_token %} 	
+	 	<h2>Enter Agent Code</h2>
+    <form action="." method="post" class="order-form">
+      {{ form.as_p }}
+      <div>
+          <a><input class="btn btn-primary cta" href="{% url 'purchase_create'%}" type="submit" value="Next"></a>
+      </div>
+    {% csrf_token %}
+    </form>
+  </form>
+{% endblock %}
